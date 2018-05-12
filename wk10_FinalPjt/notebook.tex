@@ -1,0 +1,1552 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Fantasy Hockey Draft List Generator - Final Prj - Jeff Puuri}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Fantasy Hockey Draft List
+Generator}\label{fantasy-hockey-draft-list-generator}
+
+** Final Project for DSE200x by Jeff Puuri **
+
+Abstract: In 2017, it was estimated that there were over 50 million
+participants in online fantasy sports. Participation in fantasy sports
+is a leisure activity, but many play for money as well as pride.
+
+Drafting the best team at the start of each season is a major key to a
+successful season as measured by winning one's league, or finishing 'in
+the money' (usually the top 3 spots). In helping participants prepare
+for a draft, many online leagues provide a suggested draft list, based
+on 'expert' advice, that ranks sports players' projected performance in
+the upcoming season that rely mainly on last year's player stats only.
+It can be shown, based on average draft position, that league-provided
+suggested draft lists are the predominant source for draft selections.
+
+Are these league-provided draft lists, the best source for one's draft
+choices? Or is it possible to apply data science to create an improved
+draft list of players, based on more than just last years stats, that
+can provide a fantasy participant with an advantage at draft time over
+those using the draft list provided by the online fantasy host?
+
+The goal in drafting a better team is to give one a better chance of
+their team finishing the season in the top spots, providing enhanced
+enjoyment, pride, and possible winnings in leagues that play for money.
+
+This project study will produce a model for Fantasy Hockey using Yahoo
+Sports, the online service in which I have participated with same league
+for over ten years. Therefore I will use the same statistical categories
+that are used by my league. Although the model produced by this study is
+specific to the sport of hockey and a certain set of statsitical
+categories used by my leagues, I would like to demonstrate that this
+approach could be extended to other fantasy sports and the statistical
+categories defined for a participant's particular league.
+
+One other note is that this study is geared towards season-long fantasy
+leagues, and not daily matchups that are becoming popular.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{c+c1}{\PYZsh{} import libraries to use}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         \PY{n}{dataFolder} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D:/PjtData/4\PYZus{}PD/edX\PYZus{}DSE200x/wk10\PYZus{}FinalPjt/}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \subsection{Import Datasets}\label{import-datasets}
+
+The next step is to import the datasets that will be used in the
+analysis. One set is going to contain the predicted and actual rankings
+from Yahoo Sports for all players for the 2017-18 season (ranks). The
+other contains the player statistics for 2004-2017 from
+Hockey-Reference.com that has been cleansed by a user through Kaggle
+(stats). Finally we have the final stats for the 2017-18 season that I
+downloaded myself from Hockey-Reference.com into a csv file (stats18).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{statsFile} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHLKaggleStats.csv}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{ranksFile} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YahooPlayerRanks.csv}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{stats18File} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHLHockeyRef18.csv}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{statsDF} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{n}{statsFile}\PY{p}{)}
+         \PY{n}{ranksDF} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{n}{ranksFile}\PY{p}{)}
+         \PY{n}{statsDF18} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{n}{stats18File}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Remove unnecessary columns -
+Ranks}\label{remove-unnecessary-columns---ranks}
+
+Each of the raw datasets contains statistical columns that are not part
+of the Yahoo Fantasy Hockey scoring criteria, therefore they can be
+removed to unclutter upcoming dataframe displays. The following columns
+are considered for the scoring criteria: G = Goals, A = Assists, PM =
+Plus/Minus, PIM = Penalties in Minutes, PPP=Power Play Points, GWG =
+Game Winning Goals, SOG = Shots on Goal, HIT = Hits, BLK = Blocked
+shots. We need to keep the GP = Games Played column for normalizing
+stats in a later step, and the PreSeasonRank and EndSeasonRank columns
+for comparing the model results. We also keep PlayerName, Team, and
+Pos(ition) for identification purposes in visualizations and reports.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{ranksDF}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} Index(['PlayerName', 'Team', 'Pos', 'GP', 'PreSeasonRank', 'EndSeasonRank',
+                'TOIperGP', 'G', 'A', 'PM', 'PIM', 'PPP', 'GWG', 'SOG', 'HIT', 'BLK'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{k}{del}\PY{p}{(}\PY{n}{ranksDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TOIperGP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ranksDF}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} Index(['PlayerName', 'Team', 'Pos', 'GP', 'PreSeasonRank', 'EndSeasonRank',
+                'G', 'A', 'PM', 'PIM', 'PPP', 'GWG', 'SOG', 'HIT', 'BLK'],
+               dtype='object')
+\end{Verbatim}
+            
+    \subsection{Remove unnecessary columns -
+Stats}\label{remove-unnecessary-columns---stats}
+
+Keep the same corresponding columns from the Kaggle/Hockey Reference
+sources, and then rename the columns to align with the Yahoo naming
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{statsDF}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}93}]:} Index(['HockeyRefID', 'Player', 'Age', 'Tm', 'Pos', 'GP', 'G', 'A', 'PTS',
+                'PM', 'PIM', 'PS', 'EVG', 'PPG', 'SHG', 'GWG', 'EVA', 'PPA', 'SHA',
+                'SOG', 'SPCT', 'TOI', 'ATOI', 'BLK', 'HIT', 'FOW', 'FOL', 'FOPCT',
+                'HART', 'Votes', 'Season'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{statsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{statsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{statsDF}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PTS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EVG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SHG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EVA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SHA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SPCT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TOI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ATOI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FOW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FOL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FOPCT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HART}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Votes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{statsDF}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Player}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Team}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{statsDF} \PY{o}{=} \PY{n}{statsDF}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HockeyRefID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Team}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PIM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SOG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HIT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BLK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Season}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{statsDF}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:} Index(['HockeyRefID', 'PlayerName', 'Team', 'Pos', 'GP', 'G', 'A', 'PM', 'PIM',
+                'PPP', 'GWG', 'SOG', 'HIT', 'BLK', 'Season'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{statsDF18}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}95}]:} Index(['HockeyRefID', 'Player', 'Age', 'Tm', 'Pos', 'GP', 'G', 'A', 'PTS',
+                'PM', 'PIM', 'PS', 'EVG', 'PPG', 'SHG', 'GWG', 'EVA', 'PPA', 'SHA',
+                'SOG', 'SPCT', 'TOI', 'ATOI', 'BLK', 'HIT', 'FOW', 'FOL', 'FOPCT'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Season}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2018}
+         \PY{n}{statsDF18}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PTS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EVG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SHG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EVA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SHA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SPCT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TOI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ATOI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FOW}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FOL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FOPCT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{statsDF18}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Player}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Team}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{statsDF18} \PY{o}{=} \PY{n}{statsDF18}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HockeyRefID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Team}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PIM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SOG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HIT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BLK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Season}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{statsDF18}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}96}]:} Index(['HockeyRefID', 'PlayerName', 'Team', 'Pos', 'GP', 'G', 'A', 'PM', 'PIM',
+                'PPP', 'GWG', 'SOG', 'HIT', 'BLK', 'Season'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{c+c1}{\PYZsh{} Slice the stats dataset to contain rows for just the seasons we need (2015\PYZhy{}2017)}
+         \PY{n}{statsSeasons} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{2016}\PY{p}{,} \PY{l+m+mi}{2017}\PY{p}{]}
+         \PY{n}{statsDF} \PY{o}{=} \PY{n}{statsDF}\PY{p}{[}\PY{n}{statsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Season}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{statsSeasons}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{statsDF}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}98}]:} (2668, 15)
+\end{Verbatim}
+            
+    \subsection{How good are the 'Expert'
+Rankings?}\label{how-good-are-the-expert-rankings}
+
+Online leagues, including Yahoo, provide a ranking list, from 1 to n,
+with 1 being the best, based on their projections for player performance
+in the upcoming season based on scoring categories. Per Yahoo on how
+they make their determinations: "(Keep in mind these are the
+``x-rankings'' for the players, i.e. the expert ranking based on last
+season's performance and predictions for this season. This is the
+ranking used in the auto draft.)" Note that the ranking is mainly based
+on last year's performance.
+\href{https://www.reddit.com/r/fantasybball/comments/25b9oc/how_does_yahoo_or_other_fantasy_sites_calculate/}{Another
+source} reports the evaluation of last year's performance is based on
+what is called a z-score. First, we will see how well the expert ranking
+for each player for this past season translated to their actual ranking
+by the end of the season. Then, I would like to see if using a linear
+regression using the data from the past three seasons would have
+provided a preseason ranking that resulted in a better correlation.
+
+In the Yahoo statistics for each player, they provide a column for the
+pre-season ranking and the current ranking. Since the NHL season has
+recently concluded, the dataset I downloaded will show how well the
+pre-season 'expert' rankings held up for this past season. I renamed the
+current ranking column as reprted by Yahoo to EndSeasonRank to reflect
+this. As you can see from the listing of the top 20 preseason ranks, who
+are typically drafted in the early rounds, some of the predictions were
+not too far off, but others are pretty bad. This is just a subjective
+scan of the data right now. After this, look at the statistical analysis
+of how close.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{ranksDF}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}99}]:}             PlayerName Team   Pos  GP  PreSeasonRank  EndSeasonRank   G   A  \textbackslash{}
+         0       Connor McDavid  Edm     C  82              1              8  41  67   
+         1        Sidney Crosby  Pit     C  82              2             11  29  60   
+         2         Patrick Kane  Chi    RW  82              3            117  27  49   
+         3      Auston Matthews  Tor     C  62              4             93  34  29   
+         4          Brent Burns   SJ     D  82              6             29  12  55   
+         5   Vladimir Tarasenko  StL    RW  80              7             39  33  33   
+         6        Alex Ovechkin  Was    LW  82              8              3  49  38   
+         7      Nikita Kucherov   TB    RW  80              9              6  39  61   
+         8        Evgeni Malkin  Pit     C  78             10              2  42  56   
+         9          Jack Eichel  Buf     C  67             11            181  25  39   
+         10          Jamie Benn  Dal  C,LW  82             12              5  36  43   
+         11        Patrik Laine  Wpg    RW  82             13             19  44  26   
+         12       Brad Marchand  Bos    LW  68             14             14  34  51   
+         13      Leon Draisaitl  Edm  C,RW  78             16            275  25  45   
+         14       Erik Karlsson  Ott     D  71             17            195   9  53   
+         15       Victor Hedman   TB     D  77             18             13  17  46   
+         16   Nicklas Backstrom  Was     C  81             19             77  21  50   
+         17      Mark Scheifele  Wpg     C  60             20            205  23  37   
+         18        John Tavares  NYI     C  82             21             69  37  47   
+         19    Dustin Byfuglien  Wpg     D  69             23             26   8  37   
+         
+             PM  PIM  PPP  GWG  SOG  HIT  BLK  
+         0   20   26   20    7  274   28   46  
+         1    0   46   38    6  247   75   36  
+         2  -20   32   22    4  285   18   14  
+         3   25   12   13    5  187   16   61  
+         4  -16   46   27    2  332   79  136  
+         5   15   17   16    5  306   89   37  
+         6    3   32   31    7  355  139   21  
+         7   15   42   36    7  279   31   15  
+         8   16   87   38    7  239   48   32  
+         9  -25   32   20    4  246   52   35  
+         10  20   54   22    7  241  140   62  
+         11   8   24   31    8  241   74   43  
+         12  25   63   23    8  182   37   25  
+         13  -7   30   11    1  194   40   24  
+         14 -25   36   18    2  196   58  120  
+         15  32   54   26    1  216  139  110  
+         16   5   46   26    4  165   37   51  
+         17  19   18   16    3  125   57   31  
+         18 -12   26   30    3  257   30   34  
+         19  15  112   22    1  193  147  100  
+\end{Verbatim}
+            
+    Inthe rankings dataset, I only downloaded for a union of the top 100
+preseason and top 100 endseason rankings. There are over 900 players
+total in the NHL, but only the top players are eve drafted, so I limited
+the dataset for better visibility.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{ranksDF}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}100}]:} (136, 15)
+\end{Verbatim}
+            
+    We learned about correlation in the course, so next will be a look at
+the correlation between Preseason and Endseason ranking, followed by a
+scatter plot to see what that looks like.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{rankCorr} \PY{o}{=} \PY{n}{ranksDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PreSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{ranksDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{rankCorr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}101}]:} -0.06867974836107163
+\end{Verbatim}
+            
+    Wow, that is interesting to see a negative correlation between the two
+variables! What does the scatter chart look like? One would hope to see
+a grouping along the line defined by y = mx + b where m(slope) is 1, and
+b(y-intercept) is 0
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{ranksDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PreSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ranksDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Label the axes}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pre\PYZhy{}season ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{End\PYZhy{}season (Actual) ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}label the figure}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Expert}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{ rankings provided by Yahoo.  }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Corr=}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{rankCorr}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{expertranks.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can see, the plot doesn't reflect this at all, so the rest of the
+analysis will try to make an improvement. It is interesting to note that
+on the draft page from the Yahoo web site, the average draft position
+corresponds very closely to the Preseason rank. This means that a large
+majority of fantasy participants use this 'expert' ranking in their
+draft. As we can see this may not be the best advice. If we can find a
+better predictor, then one should be able to obtain a draft advantage.
+
+    \section{Does the Z-score reflect the current
+ranking?}\label{does-the-z-score-reflect-the-current-ranking}
+
+As quoted previously, Yahoo uses the statistic called Z-score when
+computing the rankings. In order to have a comparative, I need to
+confirm that the Z-score for the player's 2018 current year stats
+closesy correlates to their End of season ranking.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{c+c1}{\PYZsh{} Make a function that will return mean and std for a column so that we can compute the z\PYZhy{}score}
+          \PY{c+c1}{\PYZsh{} for values in that column}
+          \PY{k}{def} \PY{n+nf}{calcCatZ}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{dfcol}\PY{p}{)}\PY{p}{:}
+              \PY{n}{colMean} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{dfcol}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              \PY{n}{colStd} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{dfcol}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{k}{return} \PY{p}{(}\PY{n}{colMean}\PY{p}{,} \PY{n}{colStd}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Apply the function above to the statistical columns of interest}
+          \PY{k}{for} \PY{n}{curCol} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PIM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SOG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HIT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BLK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+              \PY{n}{curMean}\PY{p}{,} \PY{n}{curStd} \PY{o}{=} \PY{n}{calcCatZ}\PY{p}{(}\PY{n}{statsDF18}\PY{p}{,} \PY{n}{curCol}\PY{p}{)}
+              \PY{n}{statsDF18}\PY{p}{[}\PY{n}{curCol} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{statsDF18}\PY{p}{[}\PY{n}{curCol}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{curMean}\PY{p}{)} \PY{o}{/} \PY{n}{curStd}
+          
+          \PY{c+c1}{\PYZsh{} Compute the Total Z\PYZhy{}score across all the columns}
+          \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PMZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PYZbs{}
+                              \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PIMZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPPZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWGZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PYZbs{}
+                              \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWGZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SOGZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HITZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Now rank the data frame by the Total Z,  Fingers crossed that it will correlate}
+          \PY{c+c1}{\PYZsh{} very closely for the End of Season ranking supplied by Yahoo}
+          \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{statsDF18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} The higher total Z score, the better}
+          
+          \PY{c+c1}{\PYZsh{} Now merge bank to the Yahoo rankings data frame so that we can see a side\PYZhy{}by\PYZhy{}side comparison}
+          \PY{c+c1}{\PYZsh{} of our computed Z\PYZhy{}score ranking to the Yahoo\PYZhy{}determined End of Season ranking}
+          \PY{n}{srnk18} \PY{o}{=} \PY{n}{statsDF18}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{ranksDF}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} We only saved the Yahoo rankings for the top players, but computed Z\PYZhy{}Score}
+          \PY{c+c1}{\PYZsh{} ranking for all, so get rid of records without the Yahoo rankings}
+          \PY{n}{srnk18} \PY{o}{=} \PY{n}{srnk18}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)} 
+          
+          \PY{c+c1}{\PYZsh{} Save the dataframe sorte by Yahoo Rank for display purposes}
+          \PY{n}{srnk18}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} 
+          
+          \PY{c+c1}{\PYZsh{} Look at the top rows for a sanity check}
+          \PY{n}{srnk18}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Team\PYZus{}x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}103}]:}            PlayerName Team\_x  EndSeasonRank  ZRnk
+          448  Nathan MacKinnon    COL            1.0   1.0
+          714     Evgeni Malkin    PIT            2.0   2.0
+          782     Alex Ovechkin    WSH            3.0   3.0
+          506       Taylor Hall    NJD            4.0   5.0
+          399        Jamie Benn    DAL            5.0   6.0
+          276   Nikita Kucherov    TBL            6.0   4.0
+          39      Blake Wheeler    WPG            7.0  23.0
+          790    Connor McDavid    EDM            8.0   8.0
+          449      Tyler Seguin    DAL            9.0  13.0
+          300      Dustin Brown    LAK           10.0  11.0
+          483     Sidney Crosby    PIT           11.0  15.0
+          554     Victor Hedman    TBL           13.0  38.0
+          214     Brad Marchand    BOS           14.0   7.0
+          74   Vincent Trocheck    FLA           15.0  22.0
+          199    Brayden Schenn    STL           16.0  10.0
+\end{Verbatim}
+            
+    \subsection{Not perfect, but how well does it
+correlate?}\label{not-perfect-but-how-well-does-it-correlate}
+
+From the previous data frame glimpse, obviously the computed Z-score
+does not exactly line up with Yahoo's published End of season ranking
+for each player. However, it does not appear near as far off as the
+Yahoo's Pre-Season Ranking. But to confirm, we will compute the
+correlation and graph using another scatter plot for confirmation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{srnk18corr} \PY{o}{=} \PY{n}{srnk18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{srnk18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{srnk18corr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}104}]:} 0.7970790994912658
+\end{Verbatim}
+            
+    Interesting that we went from a negative correlation previously to
+almost 0.8, so although not perfect, a huge improvement. I don't recall
+that we have learned in this class at what correlation value we can say
+is good enough to keep processing, but to complete this final project, I
+will subjectively decide the correlation value improvement is
+significant enough to warrant the next step. Just for visualization,
+let's look at the scatter plot of what this improved correlation looks
+like.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{srnk18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{srnk18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Label the axes}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{End\PYZhy{}season Yahoo ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Computed Z\PYZhy{}score ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}label the figure}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparing 2018 Yahoo End\PYZhy{}of\PYZhy{}Season rank to computed Z\PYZhy{}score }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Corr=}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{srnk18corr}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018EndSeasonVsZRnks.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Wow - that's a big difference from the last plot. Much better grouping
+on either side of a hypothetical line with a slope equation of y = 1 * x
++ 0
+
+    \subsection{Linear Regression
+Predictor}\label{linear-regression-predictor}
+
+Now we will see if we can build a model that employs linear regression
+to predict a numeric Pre-season Ranking value that will outperform that
+provided by Yahoo. Remember theirs is based on just last year's (2017)
+statistics plus the 'expert' prediction for 2018, that we saw might not
+be so expewrt. Our linear regression model will be based on Z-scores for
+each category from the last three years. Are players improving or
+regressing over the last several years? Was last year an aberration? Of
+course this analysis has potential flaws when it comes to how do you
+incorporate young players with less than three years experience, and how
+to account for a player having had a significant injury in one of the
+last the three years that would have depressed their season long stats
+for the year in which the injury occurred. I don't know if I'll be able
+to incorporate that alternative analysis in this final project, but if
+the overall results show this model has good potential, then these
+situations would be potentially important to consider in further
+refining this model concept.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{c+c1}{\PYZsh{} Create Dataframes for use with the previously defined function used to compute Z\PYZhy{}Scores,}
+          \PY{c+c1}{\PYZsh{} but now we have to do it for each season in a data frame that has multiple seasons}
+          \PY{c+c1}{\PYZsh{} I can probably do the same thing on slices, but keeping it simple stupid in order to finish}
+          \PY{n}{statsDFDict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          \PY{k}{for} \PY{n}{yr} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{2015}\PY{p}{,} \PY{l+m+mi}{2016}\PY{p}{,} \PY{l+m+mi}{2017}\PY{p}{]}\PY{p}{:}
+              \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]} \PY{o}{=} \PY{n}{statsDF}\PY{p}{[}\PY{n}{statsDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Season}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{yr}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Apply the function above to the statistical columns of interest}
+              \PY{k}{for} \PY{n}{curCol} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PIM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SOG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HIT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BLK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                  \PY{n}{curMean}\PY{p}{,} \PY{n}{curStd} \PY{o}{=} \PY{n}{calcCatZ}\PY{p}{(}\PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{,} \PY{n}{curCol}\PY{p}{)}
+                  \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{n}{curCol} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{n}{curCol}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{curMean}\PY{p}{)} \PY{o}{/} \PY{n}{curStd}
+                  
+              \PY{c+c1}{\PYZsh{} Compute the Total Z\PYZhy{}score across all the columns}
+              \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PMZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PYZbs{}
+                                        \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PIMZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPPZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWGZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PYZbs{}
+                                        \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GWGZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SOGZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HITZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+              \PY{c+c1}{\PYZsh{} Now rank the data frame by the Total Z,  Fingers crossed that it will correlate}
+              \PY{c+c1}{\PYZsh{} very closely for the End of Season ranking supplied by Yahoo}
+              \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{statsDFDict}\PY{p}{[}\PY{n}{yr}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} The higher total Z score, the better}
+          \PY{n}{statsDFDict}\PY{p}{[}\PY{l+m+mi}{2015}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:}      HockeyRefID             PlayerName Team Pos  GP   G   A  PM  PIM  PPP  \textbackslash{}
+          1789   ovechal01          Alex Ovechkin  WSH  LW  81  53  28  10   58   34   
+          1806   pacioma01         Max Pacioretty  MTL  LW  80  37  30  38   32   11   
+          1787   tavarjo01           John Tavares  NYI   C  82  38  48   5   46   31   
+          1805    nashri01              Rick Nash  NYR  LW  79  42  27  29   36   12   
+          1786    bennja01             Jamie Benn  DAL  LW  82  35  52   1   64   23   
+          1828    laddan01            Andrew Ladd  WPG  LW  81  24  38   9   72   19   
+          1831   wheelbl01          Blake Wheeler  WPG  RW  79  26  35  26   73   12   
+          1799   stamkst01         Steven Stamkos  TBL   C  82  43  29   2   49   25   
+          1795   tarasvl01     Vladimir Tarasenko  STL  RW  77  37  36  27   31   18   
+          1808   toewsjo01         Jonathan Toews  CHI   C  81  28  38  30   36   17   
+          1802   paveljo01           Joe Pavelski  SJS   C  82  37  33  12   29   31   
+          1800   johnsty01          Tyler Johnson  TBL   C  77  29  43  33   24   17   
+          1804   getzlry01           Ryan Getzlaf  ANA   C  77  25  45  15   62   13   
+          1797   giroucl01          Claude Giroux  PHI   C  81  25  48  -3   36   37   
+          1796   foligni01           Nick Foligno  CBJ  LW  79  31  42  16   50   26   
+          1820   vrbatra01           Radim Vrbata  VAN  RW  79  31  32   6   20   23   
+          1822   forsbfi01         Filip Forsberg  NSH   C  82  26  37  15   24   19   
+          1792   seguity01           Tyler Seguin  DAL   C  71  37  40  -1   20   29   
+          1838   subbapk01            P.K. Subban  MTL   D  82  15  45  21   74   21   
+          1872   simmowa01         Wayne Simmonds  PHI  RW  75  28  22  -5   66   24   
+          1826   monahse01           Sean Monahan  CGY   C  81  31  31   8   12   19   
+          1790   voracja01          Jakub Voracek  PHI  RW  82  22  59   1   78   33   
+          1843   tatarto01            Tomas Tatar  DET   C  82  29  27   6   28   19   
+          1788   crosbsi01          Sidney Crosby  PIT   C  77  28  56   5   47   31   
+          1892   kreidch01          Chris Kreider  NYR  LW  80  21  25  24   88    8   
+          1841   backeda01           David Backes  STL   C  80  26  32   7  104   16   
+          1809   karlser01          Erik Karlsson  OTT   D  82  21  45   7   42   30   
+          1899   byfugdu01       Dustin Byfuglien  WPG   D  69  18  27   5  124   17   
+          1913   ekmanol01   Oliver Ekman-Larsson  ARI   D  82  23  20 -18   40   20   
+          1824   palaton01           Ondrej Palat  TBL  LW  75  16  47  31   24   11   
+          {\ldots}          {\ldots}                    {\ldots}  {\ldots}  ..  ..  ..  ..  ..  {\ldots}  {\ldots}   
+          2659   wilsoga01         Garrett Wilson  FLA  LW   2   0   0  -2    0    0   
+          2631   oleksst01          Steven Oleksy  WSH   D   1   0   0  -1    0    0   
+          2601   gaudety01           Tyler Gaudet  ARI   C   2   0   0  -1    0    0   
+          2666   yakimbo01         Bogdan Yakimov  EDM   C   1   0   0  -1    0    0   
+          2596   fialake01            Kevin Fiala  NSH  LW   1   0   0  -1    0    0   
+          2655    uherdo01           Dominik Uher  PIT   C   2   0   0  -1    0    0   
+          2615   klingca01         Carl Klingberg  WPG  LW   2   0   0  -1    0    0   
+          2598   fraseco01           Colin Fraser  STL   C   1   0   0  -1    0    0   
+          2565     altma01               Mark Alt  PHI   D   1   0   0  -1    0    0   
+          2577   bourqry01           Ryan Bourque  NYR   C   1   0   0  -1    0    0   
+          2525    blumjo02          Jonathon Blum  MIN   D   4   0   1  -3    2    0   
+          2630   nurseda01          Darnell Nurse  EDM   D   2   0   0  -2    0    0   
+          2590   damigje01          Jerry D'Amigo  BUF  RW   9   0   0  -4    2    0   
+          2610   heatlda01           Dany Heatley  ANA  LW   6   0   0  -3    0    0   
+          2393   gorgejo01            Josh Gorges  BUF   D  46   0   6 -28   16    0   
+          2569   ashtoca01          Carter Ashton  TOR  RW   7   0   0  -3    0    0   
+          2537   nichuva01      Valeri Nichushkin  DAL  RW   8   0   1  -5    2    0   
+          2651   suttebr05           Brody Sutter  CAR   C   4   0   0  -2    0    0   
+          2660   wilsory01            Ryan Wilson  COL   D   3   0   0  -3    0    0   
+          2614   khokhal01  Alexander Khokhlachev  BOS   C   3   0   0  -2    0    0   
+          2602   gostish01    Shayne Gostisbehere  PHI   D   2   0   0  -2    0    0   
+          2572   blackje01          Jesse Blacker  ANA   D   1   0   0  -2    0    0   
+          2645   setogde01        Devin Setoguchi  CGY  RW  12   0   0  -7    4    0   
+          2540   oestejo01        Jordan Oesterle  EDM   D   6   0   1  -4    0    0   
+          2643   samueph01      Philip Samuelsson  ARI   D   4   0   0  -3    0    0   
+          2613   jonesbl01            Blair Jones  PHI   C   4   0   0  -4    2    0   
+          2500   corrafr01          Frank Corrado  VAN   D  10   1   0  -7    0    0   
+          2639   reinhma01           Max Reinhart  CGY   C   4   0   0  -3    0    0   
+          2665   wothety01      Tyler Wotherspoon  CGY   D   1   0   0  -3    0    0   
+          2607   harrisc01       Scott Harrington  PIT   D  10   0   0 -10    4    0   
+          
+                {\ldots}          AZ       PMZ      PIMZ      PPPZ      GWGZ      SOGZ  \textbackslash{}
+          1789  {\ldots}    1.216809  1.050320  1.198161  4.201897  5.632449  4.452637   
+          1806  {\ldots}    1.376372  3.891361  0.214760  0.912314  5.057603  3.123530   
+          1787  {\ldots}    2.812445  0.542991  0.744284  3.772821  3.907911  2.780534   
+          1805  {\ldots}    1.137027  2.978169  0.366052  1.055339  3.907911  3.152112   
+          1786  {\ldots}    3.131573  0.137128  1.425100  2.628618  2.758219  2.423247   
+          1828  {\ldots}    2.014627  0.948854  1.727685  2.056516  2.758219  2.008795   
+          1831  {\ldots}    1.775282  2.673772  1.765508  1.055339  2.758219  2.294624   
+          1799  {\ldots}    1.296591  0.238594  0.857753  2.914669  2.758219  2.637619   
+          1795  {\ldots}    1.855063  2.775238  0.176937  1.913491  2.758219  2.580454   
+          1808  {\ldots}    2.014627  3.079635  0.366052  1.770466  3.333065  1.551467   
+          1802  {\ldots}    1.615718  1.253252  0.101290  3.772821  2.183372  2.537579   
+          1800  {\ldots}    2.413536  3.384032 -0.087825  1.770466  2.758219  1.708674   
+          1804  {\ldots}    2.573100  1.557649  1.349453  1.198364  2.758219  1.537176   
+          1797  {\ldots}    2.812445 -0.268735  0.366052  4.630973  1.608526  2.794826   
+          1796  {\ldots}    2.333754  1.659115  0.895576  3.057694  1.033680  1.408553   
+          1820  {\ldots}    1.535936  0.644457 -0.239118  2.628618  3.333065  2.623328   
+          1822  {\ldots}    1.934845  1.557649 -0.087825  2.056516  2.758219  2.194584   
+          1792  {\ldots}    2.174191 -0.065803 -0.239118  3.486770  2.183372  2.809117   
+          1838  {\ldots}    2.573100  2.166443  1.803331  2.342567  2.183372  1.237055   
+          1872  {\ldots}    0.738118 -0.471666  1.500746  2.771643  2.758219  1.494302   
+          1826  {\ldots}    1.456154  0.847389 -0.541703  2.056516  3.907911  1.537176   
+          1790  {\ldots}    3.690046  0.137128  1.954623  4.058871  1.033680  1.965920   
+          1843  {\ldots}    1.137027  0.644457  0.063467  2.056516  3.333065  1.823005   
+          1788  {\ldots}    3.450700  0.542991  0.782107  3.772821  1.033680  2.194584   
+          1892  {\ldots}    0.977463  2.470841  2.332855  0.483238  2.183372  1.379970   
+          1841  {\ldots}    1.535936  0.745923  2.938024  1.627440  1.033680  1.422844   
+          1809  {\ldots}    2.573100  0.745923  0.592991  3.629795  1.033680  2.980615   
+          1899  {\ldots}    1.137027  0.542991  3.694487  1.770466  1.033680  1.794423   
+          1913  {\ldots}    0.578554 -1.790721  0.517345  2.199542  3.333065  2.580454   
+          1824  {\ldots}    2.732664  3.181101 -0.087825  0.912314  2.183372  0.794019   
+          {\ldots}   {\ldots}         {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+          2659  {\ldots}   -1.017083 -0.167269 -0.995580 -0.660965 -0.690858 -1.121038   
+          2631  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.178204   
+          2601  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.178204   
+          2666  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.178204   
+          2596  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.149621   
+          2655  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.192495   
+          2615  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.192495   
+          2598  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.178204   
+          2565  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.192495   
+          2577  {\ldots}   -1.017083 -0.065803 -0.995580 -0.660965 -0.690858 -1.178204   
+          2525  {\ldots}   -0.937301 -0.268735 -0.919934 -0.660965 -0.690858 -1.149621   
+          2630  {\ldots}   -1.017083 -0.167269 -0.995580 -0.660965 -0.690858 -1.163913   
+          2590  {\ldots}   -1.017083 -0.370200 -0.919934 -0.660965 -0.690858 -1.092455   
+          2610  {\ldots}   -1.017083 -0.268735 -0.995580 -0.660965 -0.690858 -1.078164   
+          2393  {\ldots}   -0.538392 -2.805378 -0.390410 -0.660965 -0.690858 -0.792334   
+          2569  {\ldots}   -1.017083 -0.268735 -0.995580 -0.660965 -0.690858 -1.135330   
+          2537  {\ldots}   -0.937301 -0.471666 -0.919934 -0.660965 -0.690858 -1.106747   
+          2651  {\ldots}   -1.017083 -0.167269 -0.995580 -0.660965 -0.690858 -1.192495   
+          2660  {\ldots}   -1.017083 -0.268735 -0.995580 -0.660965 -0.690858 -1.149621   
+          2614  {\ldots}   -1.017083 -0.167269 -0.995580 -0.660965 -0.690858 -1.178204   
+          2602  {\ldots}   -1.017083 -0.167269 -0.995580 -0.660965 -0.690858 -1.163913   
+          2572  {\ldots}   -1.017083 -0.167269 -0.995580 -0.660965 -0.690858 -1.192495   
+          2645  {\ldots}   -1.017083 -0.674598 -0.844287 -0.660965 -0.690858 -1.020998   
+          2540  {\ldots}   -0.937301 -0.370200 -0.995580 -0.660965 -0.690858 -1.092455   
+          2643  {\ldots}   -1.017083 -0.268735 -0.995580 -0.660965 -0.690858 -1.135330   
+          2613  {\ldots}   -1.017083 -0.370200 -0.919934 -0.660965 -0.690858 -1.192495   
+          2500  {\ldots}   -1.017083 -0.674598 -0.995580 -0.660965 -0.690858 -1.078164   
+          2639  {\ldots}   -1.017083 -0.268735 -0.995580 -0.660965 -0.690858 -1.149621   
+          2665  {\ldots}   -1.017083 -0.268735 -0.995580 -0.660965 -0.690858 -1.178204   
+          2607  {\ldots}   -1.017083 -0.978995 -0.844287 -0.660965 -0.690858 -1.063872   
+          
+                    HITZ      BLKZ       TotZ   ZRnk  
+          1789  3.122901 -0.200159  31.934324    1.0  
+          1806  0.599561 -0.056844  23.754648    2.0  
+          1787 -0.356999 -0.080730  21.752514    3.0  
+          1805 -0.406476 -0.176273  20.214951    4.0  
+          1786  0.830455  0.229786  19.375957    5.0  
+          1828  2.347758 -0.056844  18.594275    6.0  
+          1831  0.962394  0.325330  18.255104    7.0  
+          1799  0.286205 -0.176273  17.983846    8.0  
+          1795 -0.620878 -0.534561  17.718286    9.0  
+          1808 -0.225060 -0.582333  17.673210   10.0  
+          1802  0.368667  0.994133  17.537616   11.0  
+          1800 -0.109613 -0.128502  17.164672   12.0  
+          1804  0.500607  1.304649  16.325462   13.0  
+          1797  0.665531 -0.295702  16.310821   14.0  
+          1796  2.034402  0.277558  16.263564   15.0  
+          1820 -0.422969 -0.367360  16.243492   16.0  
+          1822  0.632546 -0.295702  16.016501   17.0  
+          1792 -0.109613 -0.343474  15.943833   18.0  
+          1838  0.451129  2.427284  15.842323   19.0  
+          1872  1.622091 -0.104616  15.621563   20.0  
+          1826 -0.505431  0.038699  15.473033   21.0  
+          1790 -0.241552 -0.295702  15.367856   22.0  
+          1843  0.335682 -0.534561  15.295250   23.0  
+          1788 -0.060136 -0.271817  15.200320   24.0  
+          1892  1.523137 -0.558447  15.150634   25.0  
+          1841  2.595144  1.113563  15.144421   26.0  
+          1809  0.385160  1.161334  14.591331   27.0  
+          1899  2.215818  0.468645  14.481742   28.0  
+          1913  1.605599  0.874704  14.211433   29.0  
+          1824  0.912917  0.229786  13.832959   30.0  
+          {\ldots}        {\ldots}       {\ldots}        {\ldots}    {\ldots}  
+          2659 -1.066173 -0.940620  -7.293957  853.0  
+          2631 -1.115650 -0.964506  -7.299134  855.0  
+          2601 -1.115650 -0.940620  -7.299134  855.0  
+          2666 -1.115650 -0.964506  -7.299134  855.0  
+          2596 -1.148635 -0.940620  -7.303536  857.0  
+          2655 -1.115650 -0.940620  -7.313426  858.5  
+          2615 -1.115650 -0.964506  -7.313426  858.5  
+          2598 -1.132143 -0.940620  -7.315627  860.0  
+          2565 -1.132143 -0.964506  -7.329918  861.0  
+          2577 -1.148635 -0.964506  -7.332119  862.0  
+          2525 -1.132143 -0.916735  -7.334547  863.0  
+          2630 -1.066173 -0.964506  -7.336831  864.0  
+          2590 -1.016696 -0.797305  -7.343182  865.0  
+          2610 -1.066173 -0.892849  -7.352548  866.0  
+          2393  0.088296  2.570600  -7.365032  867.0  
+          2569 -1.049681 -0.892849  -7.393222  868.0  
+          2537 -1.033188 -0.940620  -7.395650  869.0  
+          2651 -1.099158 -0.916735  -7.398399  870.0  
+          2660 -1.049681 -0.892849  -7.407513  871.0  
+          2614 -1.132143 -0.964506  -7.417092  872.0  
+          2602 -1.148635 -0.940620  -7.419293  873.0  
+          2572 -1.132143 -0.940620  -7.431384  874.0  
+          2645 -0.950726 -0.845077  -7.434506  875.0  
+          2540 -1.115650 -0.892849  -7.438001  876.0  
+          2643 -1.115650 -0.868963  -7.459191  877.0  
+          2613 -1.033188 -0.940620  -7.459715  878.0  
+          2500 -0.901249 -0.677876  -7.474415  879.0  
+          2639 -1.132143 -0.892849  -7.489975  880.0  
+          2665 -1.148635 -0.868963  -7.535051  881.0  
+          2607 -0.950726 -0.725648  -7.781777  882.0  
+          
+          [882 rows x 26 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{statsDFDict}\PY{p}{[}\PY{l+m+mi}{2016}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:}      HockeyRefID             PlayerName Team Pos  GP   G   A  PM  PIM  PPP  \textbackslash{}
+          902    ovechal01          Alex Ovechkin  WSH  LW  79  50  21  21   53   24   
+          893    paveljo01           Joe Pavelski  SJS   C  82  38  40  25   30   28   
+          888     kanepa01           Patrick Kane  CHI  RW  82  46  60  17   30   37   
+          890    crosbsi01          Sidney Crosby  PIT   C  80  36  49  19   42   24   
+          889     bennja01             Jamie Benn  DAL  LW  82  41  48   7   64   30   
+          950    ekmanol01   Oliver Ekman-Larsson  ARI   D  75  21  34  -6   96   27   
+          900    kopitan01           Anze Kopitar  LAK   C  81  25  49  34   16   18   
+          963    byfugdu01       Dustin Byfuglien  WPG   D  81  19  34   4  119   17   
+          928    simmowa01         Wayne Simmonds  PHI  RW  81  32  28  -7  147   21   
+          891    thornjo01           Joe Thornton  SJS   C  82  19  63  25   54   29   
+          899    tarasvl01     Vladimir Tarasenko  STL  RW  80  40  34   7   37   24   
+          905    bergepa01       Patrice Bergeron  BOS   C  80  32  36  12   49   25   
+          911    stamkst01         Steven Stamkos  TBL   C  77  36  28   3   38   23   
+          922    marchbr03          Brad Marchand  BOS  LW  77  37  24  21   90    8   
+          896    panarar01         Artemi Panarin  CHI  LW  80  30  47   8   32   24   
+          920    perryco01            Corey Perry  ANA  RW  82  34  28   2   68   24   
+          898    burnsbr01            Brent Burns  SJS   D  82  27  48  -5   53   30   
+          940    toewsjo01         Jonathan Toews  CHI   C  80  28  30  16   62    9   
+          951    lucicmi01            Milan Lucic  LAK  LW  81  20  35  26   79    8   
+          901    seguity01           Tyler Seguin  DAL   C  72  33  40   2   16   24   
+          895    wheelbl01          Blake Wheeler  WPG  RW  82  26  52   8   49   17   
+          938     nealja01             James Neal  NSH  RW  82  31  27  27   65   14   
+          934    barkoal01      Aleksander Barkov  FLA   C  66  28  31  18    8   16   
+          919    getzlry01           Ryan Getzlaf  ANA   C  77  13  50  14   55   22   
+          897    kuzneev01       Evgeny Kuznetsov  WSH   C  82  20  57  27   32   18   
+          921    carteje01            Jeff Carter  LAK   C  77  24  38  18   20   12   
+          936    schenbr01         Brayden Schenn  PHI   C  80  26  33   3   33   22   
+          915    spezzja01           Jason Spezza  DAL   C  75  33  30   4   22   24   
+          894    gaudrjo01        Johnny Gaudreau  CGY  LW  79  30  48   4   20   21   
+          903    tavarjo01           John Tavares  NYI   C  78  33  37   6   38   19   
+          {\ldots}          {\ldots}                    {\ldots}  {\ldots}  ..  ..  ..  ..  ..  {\ldots}  {\ldots}   
+          1689   collise02           Sean Collins  WSH   C   2   0   0  -1    2    0   
+          1738   muellmi01          Mirco Mueller  SJS   D  11   0   0  -4    7    0   
+          1768   stuarbr02            Brad Stuart  COL   D   6   0   0  -2    0    0   
+          1513   higgich01          Chris Higgins  VAN  LW  33   3   1 -14    4    0   
+          1785   zolniha01      Harry Zolnierczyk  ANA  LW   1   0   0  -1    0    0   
+          1687   carritr01         Trevor Carrick  CAR   D   2   0   0  -1    0    0   
+          1616   brenntj01           T.J. Brennan  TOR   D   7   1   0  -6    6    0   
+          1706   hannima01     Markus Hannikainen  CBJ  LW   4   0   0  -2    0    0   
+          1719   kulakbr01            Brett Kulak  CGY   D   8   0   0  -2    0    0   
+          1701   graovty01          Tyler Graovac  MIN   C   2   0   0  -1    0    0   
+          1716   keranmi01        Michael Keränen  MIN   C   1   0   0  -1    0    0   
+          1758   schulje02           Jeff Schultz  LAK   D   1   0   0  -1    0    0   
+          1666   slepyan01        Anton Slepyshev  EDM  RW  11   0   1  -5    2    0   
+          1699   gragnma01    Marc-Andre Gragnani  NJD   D   4   0   0  -2    2    0   
+          1671   agostke01         Kenny Agostino  CGY  LW   2   0   0  -2    0    0   
+          1717   khokhal01  Alexander Khokhlachev  BOS   C   5   0   0  -2    0    0   
+          1746   percyst01           Stuart Percy  TOR   D   3   0   0  -2    0    0   
+          1765   stephch02    Chandler Stephenson  WSH   C   9   0   0  -3    2    0   
+          1676    baunky01              Kyle Baun  CHI  RW   2   0   0  -2    0    0   
+          1704   grenial01      Alexandre Grenier  VAN  RW   6   0   0  -4    2    0   
+          1753   rendubo01         Borna Rendulic  COL  RW   3   0   0  -2    0    0   
+          1697   friesal01           Alex Friesen  VAN   C   1   0   0  -2    0    0   
+          1741   obrieji01            Jim O'Brien  NJD   C   4   0   0  -4    2    0   
+          1684   caronjo01           Jordan Caron  STL  RW   4   0   0  -3    0    0   
+          1749   ramagjo01            John Ramage  CBJ   D   1   0   0  -2    0    0   
+          1725   lindees01            Esa Lindell  DAL   D   4   0   0  -3    0    0   
+          1694   everbde01        Dennis Everberg  COL  RW  15   0   0  -5    0    0   
+          1641   gauthfr01      Frederik Gauthier  TOR   C   7   0   1  -5    0    0   
+          1710   irwinma01             Matt Irwin  BOS   D   2   0   0  -5    0    0   
+          1750   rantami01         Mikko Rantanen  COL  RW   9   0   0  -7    2    0   
+          
+                {\ldots}          AZ       PMZ      PIMZ      PPPZ      GWGZ      SOGZ  \textbackslash{}
+          902   {\ldots}    0.698465  2.460855  1.051798  2.769879  3.671961  4.488252   
+          893   {\ldots}    2.213301  2.920068  0.156745  3.341060  5.304079  2.021142   
+          888   {\ldots}    3.807864  2.001642  0.156745  4.626218  4.216000  2.914406   
+          890   {\ldots}    2.930854  2.231249  0.623729  2.769879  4.216000  2.361433   
+          889   {\ldots}    2.851126  0.853610  1.479866  3.626651  2.039844  2.347254   
+          950   {\ldots}    1.734932 -0.638833  2.725157  3.198265  3.671961  2.077857   
+          900   {\ldots}    2.930854  3.953298 -0.388070  1.913107  3.671961  1.354738   
+          963   {\ldots}    1.734932  0.509200  3.620210  1.770312  2.583883  2.347254   
+          928   {\ldots}    1.256562 -0.753636  4.709840  2.341493  2.039844  2.092036   
+          891   {\ldots}    4.047049  2.920068  1.090713  3.483856  2.583883  0.560726   
+          899   {\ldots}    1.734932  0.853610  0.429152  2.769879  3.127922  2.985300   
+          905   {\ldots}    1.894388  1.427626  0.896136  2.912674  2.583883  2.843512   
+          911   {\ldots}    1.256562  0.394397  0.468067  2.627084  3.671961  1.907711   
+          922   {\ldots}    0.937650  2.460855  2.491665  0.485154  2.583883  2.389790   
+          896   {\ldots}    2.771398  0.968413  0.234575  2.769879  3.127922  1.496526   
+          920   {\ldots}    1.256562  0.279593  1.635528  2.769879  2.583883  1.893533   
+          898   {\ldots}    2.851126 -0.524030  1.051798  3.626651  1.495805  3.850207   
+          940   {\ldots}    1.416019  1.886839  1.402036  0.627950  3.671961  1.383096   
+          951   {\ldots}    1.814660  3.034872  2.063596  0.485154  2.039844  0.603262   
+          901   {\ldots}    2.213301  0.279593 -0.388070  2.769879  2.583883  2.786797   
+          895   {\ldots}    3.170039  0.968413  0.896136  1.770312  2.039844  2.474863   
+          938   {\ldots}    1.176834  3.149675  1.518782  1.341926  0.951766  2.645009   
+          934   {\ldots}    1.495747  2.116445 -0.699393  1.627517  3.671961  1.269666   
+          919   {\ldots}    3.010583  1.657232  1.129628  2.484289  2.039844  1.368917   
+          897   {\ldots}    3.568680  3.149675  0.234575  1.913107  1.495805  1.581599   
+          921   {\ldots}    2.053844  2.116445 -0.232409  1.056335  2.583883  2.276360   
+          936   {\ldots}    1.655203  0.394397  0.273491  2.484289  2.039844  1.368917   
+          915   {\ldots}    1.416019  0.509200 -0.154578  2.769879  3.127922  1.709208   
+          894   {\ldots}    2.851126  0.509200 -0.232409  2.341493  2.583883  1.921890   
+          903   {\ldots}    1.974116  0.738806  0.468067  2.055903  2.039844  2.389790   
+          {\ldots}   {\ldots}         {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+          1689  {\ldots}   -0.975827 -0.064817 -0.932885 -0.657208 -0.680352 -1.154909   
+          1738  {\ldots}   -0.975827 -0.409226 -0.738308 -0.657208 -0.680352 -1.041478   
+          1768  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.154909   
+          1513  {\ldots}   -0.896099 -1.557259 -0.855054 -0.657208 -0.680352 -0.431790   
+          1785  {\ldots}   -0.975827 -0.064817 -1.010715 -0.657208 -0.680352 -1.140730   
+          1687  {\ldots}   -0.975827 -0.064817 -1.010715 -0.657208 -0.680352 -1.112372   
+          1616  {\ldots}   -0.975827 -0.638833 -0.777223 -0.657208 -0.680352 -0.998942   
+          1706  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.112372   
+          1719  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.027300   
+          1701  {\ldots}   -0.975827 -0.064817 -1.010715 -0.657208 -0.680352 -1.126551   
+          1716  {\ldots}   -0.975827 -0.064817 -1.010715 -0.657208 -0.680352 -1.154909   
+          1758  {\ldots}   -0.975827 -0.064817 -1.010715 -0.657208 -0.680352 -1.140730   
+          1666  {\ldots}   -0.896099 -0.524030 -0.932885 -0.657208 -0.680352 -1.084015   
+          1699  {\ldots}   -0.975827 -0.179620 -0.932885 -0.657208 -0.680352 -1.154909   
+          1671  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.112372   
+          1717  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.098194   
+          1746  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.140730   
+          1765  {\ldots}   -0.975827 -0.294423 -0.932885 -0.657208 -0.680352 -1.126551   
+          1676  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.140730   
+          1704  {\ldots}   -0.975827 -0.409226 -0.932885 -0.657208 -0.680352 -1.027300   
+          1753  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.140730   
+          1697  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.140730   
+          1741  {\ldots}   -0.975827 -0.409226 -0.932885 -0.657208 -0.680352 -1.112372   
+          1684  {\ldots}   -0.975827 -0.294423 -1.010715 -0.657208 -0.680352 -1.140730   
+          1749  {\ldots}   -0.975827 -0.179620 -1.010715 -0.657208 -0.680352 -1.154909   
+          1725  {\ldots}   -0.975827 -0.294423 -1.010715 -0.657208 -0.680352 -1.126551   
+          1694  {\ldots}   -0.975827 -0.524030 -1.010715 -0.657208 -0.680352 -1.027300   
+          1641  {\ldots}   -0.896099 -0.524030 -1.010715 -0.657208 -0.680352 -1.112372   
+          1710  {\ldots}   -0.975827 -0.524030 -1.010715 -0.657208 -0.680352 -1.112372   
+          1750  {\ldots}   -0.975827 -0.753636 -0.932885 -0.657208 -0.680352 -1.027300   
+          
+                    HITZ      BLKZ       TotZ   ZRnk  
+          902   2.797736 -0.115986  26.583701    1.0  
+          893   1.445080  0.681676  26.280491    2.0  
+          888  -0.462511 -0.430216  25.983207    3.0  
+          890   0.456601 -0.091814  23.147707    4.0  
+          889   1.601156  0.391617  20.763752    5.0  
+          950   1.566472  0.681676  19.602414    6.0  
+          900   0.248501  0.633333  19.416943    7.0  
+          963   2.745710  1.600196  19.257049    8.0  
+          928   2.225458  0.125730  18.827450    9.0  
+          891  -0.271752 -0.212672  18.360091   10.0  
+          899  -0.549219 -0.261015  18.287411   11.0  
+          905   0.231159  0.415789  18.249270   12.0  
+          911   0.786094 -0.091814  18.125800   13.0  
+          922   0.023058 -0.091814  17.414388   14.0  
+          896  -0.306435 -0.599417  16.833234   15.0  
+          920   0.699386 -0.067643  16.811232   16.0  
+          898   0.647360  2.567059  16.788291   17.0  
+          940   0.300526 -0.019300  16.770444   18.0  
+          951   3.127229 -0.406045  16.686613   19.0  
+          901   0.283184 -0.285187  16.104947   20.0  
+          895   0.491285  0.415789  16.027817   21.0  
+          938   0.855461 -0.188501  15.350739   22.0  
+          934  -0.358460  0.004872  15.205501   23.0  
+          919   0.768753  0.536647  15.161826   24.0  
+          897   0.161792 -0.236844  15.079190   25.0  
+          921   0.439260  0.004872  14.821707   26.0  
+          936   2.138750 -0.212672  14.571815   27.0  
+          915  -0.948079 -0.454388  14.549990   28.0  
+          894  -0.653270 -0.696104  14.548830   29.0  
+          903  -0.219726 -0.236844  14.479141   30.0  
+          {\ldots}        {\ldots}       {\ldots}        {\ldots}    {\ldots}  
+          1689 -1.104155 -0.889476  -7.102112  868.5  
+          1738 -1.069471 -0.865305  -7.103831  870.0  
+          1768 -0.913396 -0.768618  -7.103987  871.0  
+          1513 -0.844029 -0.502731  -7.104287  872.0  
+          1785 -1.052130 -0.937819  -7.113738  873.0  
+          1687 -1.086813 -0.889476  -7.120064  874.0  
+          1616 -0.982763 -0.816961  -7.126620  875.0  
+          1706 -0.982763 -0.937819  -7.130817  876.0  
+          1719 -1.069471 -0.865305  -7.132453  877.0  
+          1701 -1.086813 -0.937819  -7.134243  878.0  
+          1716 -1.086813 -0.937819  -7.162601  879.0  
+          1758 -1.104155 -0.889476  -7.165764  880.0  
+          1666 -0.878712 -0.913648  -7.185260  881.0  
+          1699 -1.086813 -0.913648  -7.199573  882.0  
+          1671 -1.052130 -0.937819  -7.200184  883.0  
+          1717 -1.069471 -0.913648  -7.203347  884.0  
+          1746 -1.034788 -0.865305  -7.211200  885.0  
+          1765 -1.017446 -0.841133  -7.216652  886.0  
+          1676 -1.052130 -0.937819  -7.228542  887.0  
+          1704 -1.017446 -0.865305  -7.232204  888.0  
+          1753 -1.086813 -0.865305  -7.263225  889.5  
+          1697 -1.086813 -0.937819  -7.263225  889.5  
+          1741 -0.982763 -0.889476  -7.282593  891.0  
+          1684 -1.000104 -0.937819  -7.291320  892.0  
+          1749 -1.104155 -0.841133  -7.294746  893.0  
+          1725 -1.034788 -0.720275  -7.311824  894.0  
+          1694 -0.913396 -0.647760  -7.320787  895.0  
+          1641 -0.930738 -0.768618  -7.343474  896.0  
+          1710 -1.086813 -0.937819  -7.579277  897.0  
+          1750 -1.104155 -0.671932  -7.663322  898.0  
+          
+          [898 rows x 26 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{statsDFDict}\PY{p}{[}\PY{l+m+mi}{2017}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:}     HockeyRefID          PlayerName Team Pos  GP   G   A  PM  PIM  PPP  {\ldots}    \textbackslash{}
+          5     marchbr03       Brad Marchand  BOS  LW  80  39  46  18   81   24  {\ldots}     
+          20    ovechal01       Alex Ovechkin  WSH  LW  82  33  36   6   50   26  {\ldots}     
+          0     mcdavco01      Connor McDavid  EDM   C  82  30  70  27   26   27  {\ldots}     
+          4     kucheni01     Nikita Kucherov  TBL  RW  74  40  45  13   38   32  {\ldots}     
+          8     burnsbr01         Brent Burns  SJS   D  82  29  47  19   40   25  {\ldots}     
+          26    carteje01         Jeff Carter  LAK   C  82  32  34   2   41   22  {\ldots}     
+          36    hoffmmi02        Mike Hoffman  OTT  LW  74  26  35  17   51   26  {\ldots}     
+          1     crosbsi01       Sidney Crosby  PIT   C  75  44  45  17   24   25  {\ldots}     
+          23    paveljo01        Joe Pavelski  SJS   C  81  29  39  11   34   22  {\ldots}     
+          32    atkinca01        Cam Atkinson  CBJ  RW  82  35  27  13   22   21  {\ldots}     
+          13    malkiev01       Evgeni Malkin  PIT   C  62  33  39  18   77   23  {\ldots}     
+          9     tarasvl01  Vladimir Tarasenko  STL  RW  82  39  36  -1   12   22  {\ldots}     
+          3     backsni02   Nicklas Backstrom  WSH   C  82  23  63  17   38   35  {\ldots}     
+          17    pastrda01      David Pastrnak  BOS  RW  75  34  36  11   34   24  {\ldots}     
+          25    pacioma01      Max Pacioretty  MTL  LW  81  35  32  15   38   13  {\ldots}     
+          28    staaler01          Eric Staal  MIN   C  82  28  37  17   34   16  {\ldots}     
+          2      kanepa01        Patrick Kane  CHI  RW  82  34  55  11   32   23  {\ldots}     
+          34    kadrina01         Nazem Kadri  TOR   C  82  32  29  -7   95   17  {\ldots}     
+          19    matthau01     Auston Matthews  TOR   C  82  40  29   2   14   21  {\ldots}     
+          89    rakelri01      Rickard Rakell  ANA   C  71  33  18  10   12   12  {\ldots}     
+          136   hornqpa01    Patric Hornqvist  PIT  RW  70  21  23  16   28   17  {\ldots}     
+          60    schenbr01      Brayden Schenn  PHI   C  79  25  30 -13   38   28  {\ldots}     
+          82      leean01          Anders Lee  NYI  LW  81  34  18   9   56   14  {\ldots}     
+          45    forsbfi01      Filip Forsberg  NSH  LW  82  31  27  -4   32    9  {\ldots}     
+          66    simmowa01      Wayne Simmonds  PHI  RW  82  31  23 -18  122   25  {\ldots}     
+          15    hedmavi01       Victor Hedman  TBL   D  79  16  56   3   47   33  {\ldots}     
+          76    bergepa01    Patrice Bergeron  BOS   C  79  21  32  12   24   17  {\ldots}     
+          11    wheelbl01       Blake Wheeler  WPG  RW  82  26  48   6   47   21  {\ldots}     
+          16    karlser01       Erik Karlsson  OTT   D  77  17  54  10   28   27  {\ldots}     
+          145   maroopa01      Patrick Maroon  EDM  LW  81  27  15  13   95    6  {\ldots}     
+          ..          {\ldots}                 {\ldots}  {\ldots}  ..  ..  ..  ..  ..  {\ldots}  {\ldots}  {\ldots}     
+          848    nessaa01          Aaron Ness  WSH   D   2   0   0  -1    0    0  {\ldots}     
+          878   troppco01         Corey Tropp  ANA  RW   1   0   0  -1    0    0  {\ldots}     
+          882   vecchmi01      Mike Vecchione  PHI  RW   2   0   0  -1    0    0  {\ldots}     
+          818   johnsry02       Ryan Johnston  MTL   D   7   0   0  -3    4    0  {\ldots}     
+          830   liambmi01        Mike Liambas  NSH  LW   1   0   0  -1    0    0  {\ldots}     
+          809   guriade01      Denis Gurianov  DAL  RW   1   0   0  -1    0    0  {\ldots}     
+          837   mceneev01        Evan McEneny  VAN   D   1   0   0  -1    0    0  {\ldots}     
+          838   mcneima01        Mark McNeill  DAL  RW   1   0   0  -1    0    0  {\ldots}     
+          866   rosloja01       Jack Roslovic  WPG   C   1   0   0  -1    0    0  {\ldots}     
+          886   wothety01   Tyler Wotherspoon  CGY   D   4   0   0  -2    0    0  {\ldots}     
+          855    paulni01           Nick Paul  OTT  LW   1   0   0  -2    0    0  {\ldots}     
+          879    tuchal01           Alex Tuch  MIN  RW   6   0   0  -3    0    0  {\ldots}     
+          887   zalewmi01    Michael Zalewski  VAN  LW   1   0   0  -1    0    0  {\ldots}     
+          849   nievecr01    Cristoval Nieves  NYR   C   1   0   0  -1    0    0  {\ldots}     
+          860   raymoma01       Mason Raymond  ANA  LW   4   0   0  -2    0    0  {\ldots}     
+          724   gordobo01         Boyd Gordon  PHI   C  13   1   0  -5    2    0  {\ldots}     
+          844   molingr01      Griffen Molino  VAN   C   5   0   0  -2    0    0  {\ldots}     
+          827   lashobr01       Brian Lashoff  DET   D   5   0   0  -3    0    0  {\ldots}     
+          806   grossni01   Nicklas Grossmann  CGY   D   3   0   0  -4    2    0  {\ldots}     
+          881   varonph01         Phil Varone  OTT   C   7   0   0  -3    2    0  {\ldots}     
+          790   chaboth01       Thomas Chabot  OTT   D   1   0   0  -2    0    0  {\ldots}     
+          883     veyli01          Linden Vey  CGY  RW   4   0   0  -2    0    0  {\ldots}     
+          727    jostty01          Tyson Jost  COL   C   6   1   0  -5    0    0  {\ldots}     
+          841   milanso01        Sonny Milano  CBJ  LW   4   0   0  -3    0    0  {\ldots}     
+          801     frkma01          Martin Frk  CAR  RW   2   0   0  -3    0    0  {\ldots}     
+          857   poturan01   Andrew Poturalski  CAR   C   2   0   0  -3    0    0  {\ldots}     
+          768   stromdy01        Dylan Strome  ARI   C   7   0   1  -5    0    0  {\ldots}     
+          846   naklaja01      Jakub Nakladal  CAR   D   3   0   0  -4    0    0  {\ldots}     
+          715   murphry01         Ryan Murphy  CAR   D  27   0   2 -11    8    0  {\ldots}     
+          758   oreilca01        Cal O'Reilly  BUF   C  11   0   1  -6    0    0  {\ldots}     
+          
+                     AZ       PMZ      PIMZ      PPPZ      GWGZ      SOGZ      HITZ  \textbackslash{}
+          5    2.613061  1.863847  2.351176  2.753529  3.739059  2.028985 -0.167788   
+          20   1.829381  0.648354  1.055313  3.037434  3.183177  3.269538  2.837256   
+          0    4.493893  2.775466  0.052064  3.179386  2.627295  2.385466 -0.477398   
+          4    2.534693  1.357391  0.553689  3.889149  3.183177  2.314170 -0.550248   
+          8    2.691429  1.965138  0.637293  2.895481  2.627295  3.369353  0.160035   
+          26   1.672645  0.243190  0.679095  2.469623  4.294941  2.371207  0.469646   
+          36   1.751013  1.762556  1.097115  3.037434  3.739059  2.000467 -0.349912   
+          1    2.534693  1.762556 -0.031540  2.895481  2.071412  2.442503  0.360371   
+          23   2.064485  1.154809  0.386480  2.469623  3.183177  2.128800  1.270991   
+          32   1.124069  1.357391 -0.115144  2.327671  4.294941  2.228614 -0.495611   
+          13   2.064485  1.863847  2.183968  2.611576  2.627295  1.529912 -0.368124   
+          9    1.829381 -0.060683 -0.533164  2.469623  3.739059  2.884539 -0.186000   
+          3    3.945317  1.762556  0.553689  4.315007  2.071412  1.116395 -0.277062   
+          17   1.829381  1.154809  0.386480  2.753529  2.627295  2.542317  0.214672   
+          25   1.515909  1.559973  0.553689  1.192050  3.183177  2.627873  0.050761   
+          28   1.907749  1.762556  0.386480  1.617908  3.739059  1.815097 -0.331699   
+          2    3.318373  1.154809  0.302876  2.611576  2.071412  2.970094 -0.586673   
+          34   1.280805 -0.668430  2.936404  1.759860  2.627295  2.171578  1.161717   
+          19   1.280805  0.243190 -0.449560  2.327671  3.739059  2.784724 -0.714159   
+          89   0.418757  1.053518 -0.533164  1.050098  4.850824  1.330283  0.378584   
+          136  0.810597  1.661264  0.135668  1.759860  2.627295  1.986208  3.037593   
+          60   1.359173 -1.276176  0.553689  3.321339  3.183177  1.344542  2.345522   
+          82   0.418757  0.952227  1.306125  1.334003  2.627295  1.529912  2.035911   
+          45   1.124069 -0.364557  0.302876  0.624240  4.294941  2.143059  0.669982   
+          66   0.810597 -1.782631  4.065059  2.895481  1.515530  2.000467  1.853787   
+          15   3.396741  0.344481  0.929907  4.031102  2.071412  1.173432  0.597133   
+          76   1.515909  1.256100 -0.031540  1.759860  3.183177  3.112687 -0.113151   
+          11   2.769797  0.648354  0.929907  2.327671  1.515530  2.499540  0.724619   
+          16   3.240005  1.053518  0.135668  3.179386  2.071412  1.914911  0.123610   
+          145  0.183653  1.357391  2.936404  0.198382  2.071412  1.344542  2.345522   
+          ..        {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+          848 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.193600 -1.060195   
+          878 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.193600 -1.060195   
+          882 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.179341 -1.078407   
+          818 -0.991867 -0.263265 -0.867580 -0.653334 -0.707999 -1.150822 -1.078407   
+          830 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.193600 -1.078407   
+          809 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.193600 -1.078407   
+          837 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.179341 -1.096620   
+          838 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.179341 -1.096620   
+          866 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.179341 -1.096620   
+          886 -0.991867 -0.161974 -1.034789 -0.653334 -0.707999 -1.136563 -1.041982   
+          855 -0.991867 -0.161974 -1.034789 -0.653334 -0.707999 -1.136563 -1.041982   
+          879 -0.991867 -0.263265 -1.034789 -0.653334 -0.707999 -1.079526 -1.005558   
+          887 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.193600 -1.096620   
+          849 -0.991867 -0.060683 -1.034789 -0.653334 -0.707999 -1.193600 -1.096620   
+          860 -0.991867 -0.161974 -1.034789 -0.653334 -0.707999 -1.150822 -1.041982   
+          724 -0.991867 -0.465848 -0.951184 -0.653334 -0.707999 -1.079526 -1.023770   
+          844 -0.991867 -0.161974 -1.034789 -0.653334 -0.707999 -1.150822 -1.078407   
+          827 -0.991867 -0.263265 -1.034789 -0.653334 -0.707999 -1.179341 -0.950921   
+          806 -0.991867 -0.364557 -0.951184 -0.653334 -0.707999 -1.150822 -0.969133   
+          881 -0.991867 -0.263265 -0.951184 -0.653334 -0.707999 -1.179341 -1.041982   
+          790 -0.991867 -0.161974 -1.034789 -0.653334 -0.707999 -1.179341 -1.078407   
+          883 -0.991867 -0.161974 -1.034789 -0.653334 -0.707999 -1.179341 -1.078407   
+          727 -0.991867 -0.465848 -1.034789 -0.653334 -0.707999 -1.065267 -1.041982   
+          841 -0.991867 -0.263265 -1.034789 -0.653334 -0.707999 -1.165082 -1.041982   
+          801 -0.991867 -0.263265 -1.034789 -0.653334 -0.707999 -1.179341 -1.041982   
+          857 -0.991867 -0.263265 -1.034789 -0.653334 -0.707999 -1.179341 -1.078407   
+          768 -0.913499 -0.465848 -1.034789 -0.653334 -0.707999 -1.108045 -1.041982   
+          846 -0.991867 -0.364557 -1.034789 -0.653334 -0.707999 -1.150822 -1.060195   
+          715 -0.835131 -1.073594 -0.700372 -0.653334 -0.707999 -0.951193 -1.060195   
+          758 -0.913499 -0.567139 -1.034789 -0.653334 -0.707999 -1.150822 -1.060195   
+          
+                   BLKZ       TotZ   ZRnk  
+          5   -0.105332  22.574414    1.0  
+          20  -0.249231  22.000117    2.0  
+          0   -0.249231  20.271455    3.0  
+          4   -0.465079  20.234850    4.0  
+          8    2.460868  19.465139    5.0  
+          26  -0.057365  19.335609    6.0  
+          36  -0.441096  18.920113    7.0  
+          1   -0.297197  18.341207    8.0  
+          23   0.806029  18.333364    9.0  
+          32  -0.129315  18.205694   10.0  
+          13  -0.345163  18.096740   11.0  
+          9   -0.201264  17.535300   12.0  
+          3   -0.153298  17.353549   13.0  
+          17  -0.177281  17.208432   14.0  
+          25  -0.105332  17.055429   15.0  
+          28  -0.009399  17.011864   16.0  
+          2   -0.584995  16.986535   17.0  
+          34  -0.201264  16.736845   18.0  
+          19   0.518231  16.720441   19.0  
+          89  -0.177281  16.356210   20.0  
+          136  0.542214  16.208270   21.0  
+          60   0.062551  16.041599   22.0  
+          82  -0.129315  15.904179   23.0  
+          45  -0.321180  15.813707   24.0  
+          66   0.494248  15.597975   25.0  
+          15   2.221037  15.597278   26.0  
+          76   0.182467  15.428710   27.0  
+          11   0.278399  15.074271   28.0  
+          16   3.875876  14.887749   29.0  
+          145 -0.393130  14.768209   30.0  
+          ..        {\ldots}        {\ldots}    {\ldots}  
+          848 -0.896776  -7.287469  859.5  
+          878 -0.944743  -7.287469  859.5  
+          882 -0.920760  -7.291422  861.0  
+          818 -0.896776  -7.298278  862.0  
+          830 -0.944743  -7.305681  863.5  
+          809 -0.872793  -7.305681  863.5  
+          837 -0.944743  -7.309634  866.0  
+          838 -0.920760  -7.309634  866.0  
+          866 -0.920760  -7.309634  866.0  
+          886 -0.896776  -7.313511  868.5  
+          855 -0.944743  -7.313511  868.5  
+          879 -0.776860  -7.321340  870.0  
+          887 -0.920760  -7.323894  871.5  
+          849 -0.920760  -7.323894  871.5  
+          860 -0.944743  -7.327770  873.0  
+          724 -0.776860  -7.342364  874.0  
+          844 -0.920760  -7.364195  875.0  
+          827 -0.848810  -7.366517  876.0  
+          806 -0.920760  -7.373898  877.0  
+          881 -0.920760  -7.373975  878.0  
+          790 -0.944743  -7.392713  879.5  
+          883 -0.944743  -7.392713  879.5  
+          727 -0.872793  -7.429921  881.0  
+          841 -0.896776  -7.443320  882.0  
+          801 -0.920760  -7.457579  883.0  
+          857 -0.920760  -7.494004  884.0  
+          768 -0.896776  -7.510497  885.0  
+          846 -0.848810  -7.548564  886.0  
+          715 -0.201264  -7.566820  887.0  
+          758 -0.872793  -7.672778  888.0  
+          
+          [888 rows x 26 columns]
+\end{Verbatim}
+            
+    \subsection{ML and Simple Stats with
+Z-scores}\label{ml-and-simple-stats-with-z-scores}
+
+Now that we have the Z-scores for each player across the past three
+seasons, it is possible to perform the linear regression to predict a
+number for the upcoming season. Along with that, I will look at the
+average, max, and min Z-score for each player over that span for
+comparative purposes. It will also be interesting to see if one of those
+other stats might provide a better predictor as well. In terms of linear
+regression, it will be interesting to see if the last three years is
+enough datapoints for an accurate predictor, hence the comparison to
+average, min, and max. To that end, if a player does not have three
+years of experience, then we won't perform the linear regression, but
+use their aaverage value from the last one or two years.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{c+c1}{\PYZsh{} Create the empty dataframe that will populated with the Z\PYZhy{}score stats}
+          \PY{n}{prd18} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yrs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZPrd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZAvg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Reassemble the last three years dataframes back into a single unit}
+          \PY{n}{statsDF1517} \PY{o}{=} \PY{n}{statsDFDict}\PY{p}{[}\PY{l+m+mi}{2015}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{statsDFDict}\PY{p}{[}\PY{l+m+mi}{2016}\PY{p}{]}\PY{p}{,} \PY{n}{statsDFDict}\PY{p}{[}\PY{l+m+mi}{2017}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{statsDF1517}\PY{o}{.}\PY{n}{shape}
+          
+          \PY{c+c1}{\PYZsh{} Build up a new predictor dataframe with one row per player}
+          \PY{c+c1}{\PYZsh{} Use linear regression to populate a column called ZPrd if they have stats for the last three years}
+          \PY{c+c1}{\PYZsh{} Also build up columns for the Average, Min, and Max Z\PYZhy{}Scores for each player over the last three seasons}
+          \PY{n}{players} \PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{n}{years} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{zavgs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{zprds} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{zmaxs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{zmins} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{player} \PY{o+ow}{in} \PY{n}{ranksDF}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}print(player)}
+              \PY{n}{players}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{player}\PY{p}{)}
+              \PY{n}{xtrn} \PY{o}{=} \PY{n}{statsDF1517}\PY{p}{[}\PY{n}{statsDF1517}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{player}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Season}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{ytrn} \PY{o}{=} \PY{n}{statsDF1517}\PY{p}{[}\PY{n}{statsDF1517}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{player}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+              \PY{n}{years}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ytrn}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{zavgs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ytrn}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{zmaxs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ytrn}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{zmins}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ytrn}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} Only apply linear regression if they have three years of stats, otherwise we\PYZsq{}ll use the mean}
+              \PY{k}{if} \PY{n}{ytrn}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                  \PY{n}{regr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{model} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xtrn}\PY{p}{,} \PY{n}{ytrn}\PY{p}{)}
+                  \PY{n}{xtst} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2018}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{n}{zprd} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xtst}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{n}{zprds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{zprd}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{ytrn}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n}{zprds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ytrn}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} For rookies (promising rookies are ranked by Yahoo), apply nan, but then drop later}
+              \PY{c+c1}{\PYZsh{} our draft strategy is to ignore rookies anyway because they are too unknown}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n}{zprds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{players}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yrs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{years}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZPrd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{zprds}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZAvg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{zavgs}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{zmaxs}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{zmins}
+          \PY{n}{prd18}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}109}]:}             PlayerName  Yrs       ZPrd       ZAvg       ZMax       ZMin
+          0       Connor McDavid    2  13.671750  13.671750  20.271455   7.072044
+          1        Sidney Crosby    3  22.037299  18.896412  23.147707  15.200320
+          2         Patrick Kane    3  23.155855  18.400211  25.983207  12.230891
+          3      Auston Matthews    1  16.720441  16.720441  16.720441  16.720441
+          4          Brent Burns    3  23.929952  15.894309  19.465139  11.429497
+          5   Vladimir Tarasenko    3  17.664013  17.846999  18.287411  17.535300
+          6        Alex Ovechkin    3  16.905174  26.839381  31.934324  22.000117
+          7      Nikita Kucherov    3  23.073142  15.420188  20.234850  12.581896
+          8        Evgeni Malkin    3  20.077728  15.230400  18.096740  13.249412
+          9          Jack Eichel    2   9.746444   9.746444   9.860502   9.632386
+          10          Jamie Benn    3  12.190206  17.926468  20.763752  13.639695
+          11        Patrik Laine    1  12.861614  12.861614  12.861614  12.861614
+          12       Brad Marchand    3  28.608134  16.977541  22.574414  10.943821
+          13      Leon Draisaitl    3  23.836200   4.252811  14.043802  -5.539587
+          14       Erik Karlsson    3  14.698396  14.401977  14.887749  13.726851
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{c+c1}{\PYZsh{} Merge back to the rankings dataframe so we can retrieve the Yahoo Predictions}
+          \PY{n}{prd18} \PY{o}{=} \PY{n}{prd18}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{ranksDF}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PreSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PlayerName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZPrdRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZPrd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZAvgRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZAvg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMaxRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMinRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Now use the computed Z predictor and statistics to create rankings for each}
+          \PY{n}{zPrdCorr} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZPrdRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{zAvgCorr} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZAvgRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{zMaxCorr} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMaxRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{zMinCorr} \PY{o}{=} \PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMinRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{zPrdCorr}\PY{p}{,} \PY{n}{zAvgCorr}\PY{p}{,} \PY{n}{zMaxCorr}\PY{p}{,} \PY{n}{zMinCorr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:} (0.018157176587776644,
+           0.05809136905889947,
+           0.10985820504553974,
+           0.017168380658986886)
+\end{Verbatim}
+            
+    Interesting results, but not quite the improvement that we had hoped.
+From earlier, we saw using the Yahoo preseason rankings was a -0.06
+correlation. Our prediction based on linear regression was just barely
+positive, meaning no correlation. It seems as if taking the player's
+best season of the past three provides the biggest advantage at a 0.1
+correlation. Next, let's look at the plots to visualize these
+correlations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZPrdRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Label the axes}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{End\PYZhy{}season Yahoo ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Computed Z\PYZhy{}predictor ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}label the figure}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparing 2018 Yahoo End\PYZhy{}of\PYZhy{}Season rank to Z\PYZhy{}predictor using linear regression }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Corr=}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{zPrdCorr}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018EndSeasonVsZPrdRnks.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZAvgRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Label the axes}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{End\PYZhy{}season Yahoo ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Computed Z\PYZhy{}average ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}label the figure}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparing 2018 Yahoo End\PYZhy{}of\PYZhy{}Season rank to Z\PYZhy{}average \PYZhy{} last 3 yrs }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Corr=}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{zAvgCorr}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018EndSeasonVsZAvgRnks.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EndSeasonRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{prd18}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZMaxRnk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Label the axes}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{End\PYZhy{}season Yahoo ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Computed Z\PYZhy{}maximum ranking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}label the figure}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparing 2018 Yahoo End\PYZhy{}of\PYZhy{}Season rank to Z\PYZhy{}maximum \PYZhy{} last 3 yrs }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Corr=}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{zMaxCorr}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{dataFolder} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018EndSeasonVsZMaxRnks.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Conclusion}\label{conclusion}
+
+I wouldn't call this experiment a failure, yet. I think there are some
+additional research steps one might be able to take to try improving
+these results. One idea that I thought about is to look at more seasons
+for computing the linear regression. I would also like to tackle this
+problem some more when we learn more about statistics in the upcoming
+class to see if there might be some other techniques that could lead to
+improvement. For the sake of this project, I think I satisfied the
+objective given the scope of the assignment.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
